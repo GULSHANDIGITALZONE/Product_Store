@@ -57,6 +57,61 @@ input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--
 </style>
 </head>
 <body>
+
+ <!-- 🌟 Loading Screen Start -->
+  <style>
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.9);
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+    #loading-overlay.hide { opacity: 0; pointer-events: none; }
+    .loader-wrap { display: flex; flex-direction: column; align-items: center; }
+    .ring {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: conic-gradient(from 0deg, #ff6b6b, #ffd93d, #6be4ff, #9b8cff, #ff6b6b);
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 12px), black calc(100% - 11px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 12px), black calc(100% - 11px));
+      animation: spin 1.1s linear infinite;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text {
+      margin-top: 12px;
+      font-weight: bold;
+      font-family: "Segoe UI", sans-serif;
+      color: #333;
+      font-size: 17px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+
+  <!-- 🌟 New Gradient Ring Loader -->
+  <div id="loading-overlay">
+    <div class="loader-wrap">
+      <div class="ring"></div>
+      <div class="loading-text">Loading…</div>
+    </div>
+  </div>
+
+  <script>
+    // Hide loader after full page load
+    window.addEventListener('load', () => {
+      const overlay = document.getElementById('loading-overlay');
+      overlay.classList.add('hide');
+      setTimeout(() => overlay.remove(), 600); // remove after fade
+    });
+  </script>
+
+  <!-- 🌟 Loading Screen End -->
+
+  
 <header>
   <div class="brand">
     <div class="logo">G</div>
