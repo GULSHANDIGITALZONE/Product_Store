@@ -3,22 +3,38 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Product Store — Gulshan Digital</title>
+<title>Product Store — Gulshan Digital Zone</title>
 <style>
-:root{--accent:#0f766e;--muted:#6b7280;--bg:#f8fafc}
+:root{
+  --accent:#0f766e;
+  --muted:#6b7280;
+  --bg:#f8fafc;
+  --card-bg:#ffffff;
+  --text:#0f172a;
+  --border:#e6edf0;
+}
+/* Dark theme variables (toggle by setting data-theme="dark" on <html>) */
+[data-theme="dark"]{
+  --accent:#34d399;
+  --muted:#9ca3af;
+  --bg:#071124;
+  --card-bg:#0b1220;
+  --text:#e6eef6;
+  --border:rgba(255,255,255,0.06);
+}
 *{box-sizing:border-box}
 body{font-family:Inter,system-ui,Arial;margin:0;background:var(--bg);color:#0f172a}
-header{background:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(2,6,23,0.06)}
+header{background:var(--card-bg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(2,6,23,0.06)}
 .brand{display:flex;gap:12px;align-items:center}
 .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#10b981);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
 nav{display:flex;gap:12px;align-items:center}
 .hero{padding:28px 20px;display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
-.hero-inner{background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+.hero-inner{background:var(--card-bg);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
 .hero h1{margin:0 0 8px;font-size:20px}
 .hero p{margin:0;color:var(--muted)}
 
 .products{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:18px}
-.card{background:#fff;border-radius:10px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,0.04);display:flex;gap:12px;align-items:flex-start}
+.card{background:var(--card-bg);border-radius:10px;padding:12px;box-shadow:0 6px 18px rgba(2,6,23,0.04);display:flex;gap:12px;align-items:flex-start}
 .card img{width:110px;height:80px;object-fit:cover;border-radius:8px}
 .card .info{flex:1}
 .price{font-weight:700;color:var(--accent);margin-top:6px}
@@ -34,10 +50,10 @@ footer{padding:18px;text-align:center;color:var(--muted)}
 }
 
 .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:none;align-items:center;justify-content:center}
-.modal{background:#fff;padding:18px;border-radius:12px;width:92%;max-width:420px}
+.modal{background:var(--card-bg);padding:18px;border-radius:12px;width:92%;max-width:420px}
 .field{margin-bottom:10px}
 label{display:block;font-size:13px;margin-bottom:6px}
-input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf0}
+input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text)}
 </style>
 </head>
 <body>
@@ -45,20 +61,24 @@ input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf
   <div class="brand">
     <div class="logo">G</div>
     <div>
-      <div style="font-weight:700">Gulshan Digital</div>
+      <div style="font-weight:700">Gulshan Digital Zone</div>
       <div style="font-size:13px;color:var(--muted)">Buy Digital Products Online</div>
     </div>
   </div>
   <nav>
     <a href="#products" class="muted">Products</a>
     <a href="#contact" class="muted">Contact</a>
+    <!-- Theme toggle -->
+    <button id="themeToggle" title="Toggle dark / light" style="background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:18px;padding:6px">🌙</button>
   </nav>
 </header>
 
 <section class="hero">
   <div class="hero-inner">
-    <h1>Smart & Responsive Online Store</h1>
-    <p class="muted">Yahan se aapke customers aapke products dekh kar Razorpay ya UPI se payment kar sakte hain.</p>
+    <h1 class="muted">अब आप भी अपने डिजिटल दुनिया में आयें। </h1>
+    <h1 class="muted">अब सब कुछ होगा आपके खुद के वेबसाइट पर।</h1>
+    <h1 class="muted">अपने हिसाब से वेबसाइट बनवाने के लिए आज ही संपर्क करें।</h1>
+
   </div>
 </section>
 
@@ -66,7 +86,7 @@ input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf
 
 <footer id="contact">
   <div style="max-width:800px;margin:0 auto">
-    <p>Contact: <a href="mailto:hello@example.com">hello@example.com</a> • WhatsApp: +91-6299050695</p>
+    <p>Contact: <a href="mailto: gulshandigitalzone@gmail.com">gulshandigitalzone@gmail.com</a> • WhatsApp: +91-6299050695</p>
     <p class="muted">© 2025 Gulshan Digital — All rights reserved</p>
   </div>
 </footer>
@@ -75,13 +95,13 @@ input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf
   <div class="modal">
     <h3>Order Product</h3>
     <div class="field"><label>Product</label><input id="order-product" readonly></div>
-    <div class="field"><label>Full Name</label><input id="order-name" placeholder="Aapka naam"></div>
-    <div class="field"><label>Phone</label><input id="order-phone" placeholder="Mobile number"></div>
-    <div class="field"><label>Address</label><textarea id="order-address" rows="3" placeholder="Poora address"></textarea></div>
+    <div class="field"><label>Full Name</label><input id="order-name" placeholder="Aapka naam" required></div>
+    <div class="field"><label>Phone</label><input id="order-phone" placeholder="Mobile number" required></div>
+    <div class="field"><label>Address</label><textarea id="order-address" rows="3" placeholder="Poora address" required></textarea></div>
     <div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap">
       <button id="cancel" class="btn" style="background:#e6e6e6;color:#111">Cancel</button>
-      <button id="razorpay" class="btn">Pay with Razorpay</button>
-      <button id="upi" class="btn" style="background:#2563eb">Pay via UPI</button>
+      <button id="razorpay" class="btn">Pay with Razorpay</button> 
+      <button id="upi" class="btn" style="background:#2563eb">Pay via UPI (Only phone)</button>
     </div>
   </div>
 </div>
@@ -89,8 +109,10 @@ input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6edf
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 const products = [
-  {id:'p1',title:'Digital Product 1',desc:'Sample description.',price:1,img:'https://via.placeholder.com/400x300?text=Product+1'},
-  {id:'p2',title:'Digital Product 2',desc:'Dusra product description.',price:799,img:'https://via.placeholder.com/400x300?text=Product+2'}
+  {id:'p1',title:'Form भरवाले के लिए डिटेल्स',desc:' Isme aap apna data rakh sakte hain. kaoi form bharvane ke liye sirf link send kar dene se sara data aa jayega <a href="https://gulshandigitalzone.netlify.app/" target="_blank">See simple </a>',price:1,img:'./image.png'},
+  {id:'p2',title:'Digital Product 2',desc:'Dusra product description.',price:799,img:'https://actionphototours.com/wp-content/uploads/2018/04/Cascade-Lake.jpg'},
+  {id:'p3',title:'google form banvaye',desc:'Teesra product description.',price:799,img:'https://actionphototours.com/wp-content/uploads/2018/04/Cascade-Lake.jpg'},
+  {id:'p4',title:'Digital Product 3',desc:'Teesra product description.',price:799,img:'https://actionphototours.com/wp-content/uploads/2018/04/Cascade-Lake.jpg'}
 ];
 
 const productsEl=document.querySelector('.products');
@@ -103,7 +125,7 @@ products.forEach(p=>{
       <div class='muted'>${p.desc}</div>
       <div class='price'>₹${p.price}</div>
       <div style='margin-top:8px'>
-        <button class='btn' data-title='${p.title}' data-price='${p.price}'>Buy</button>
+        <button class='btn' data-title='${p.title}' data-price='${p.price}'>Buy</button> 
       </div>
     </div>`;
   productsEl.appendChild(el);
@@ -171,6 +193,37 @@ upiBtn.addEventListener('click',()=>{
     currentBtn.disabled = true;
   }
 });
+</script>
+<script>
+// Theme toggle: persist in localStorage and respect prefers-color-scheme
+;(function(){
+  const key = 'gd-theme';
+  const btn = document.getElementById('themeToggle');
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem(key, t);
+    // button shows the action available: moon to switch to dark when currently light
+    if(btn){
+      btn.textContent = (t === 'dark') ? '☀️' : '🌙';
+      btn.title = (t === 'dark') ? 'Switch to light theme' : 'Switch to dark theme';
+    }
+  }
+
+  const saved = localStorage.getItem(key);
+  if(saved === 'dark' || saved === 'light'){
+    applyTheme(saved);
+  } else {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+  }
+
+  if(btn){
+    btn.addEventListener('click', ()=>{
+      const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  }
+})();
 </script>
 </body>
 </html>
