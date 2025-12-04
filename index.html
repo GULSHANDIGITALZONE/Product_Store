@@ -123,17 +123,18 @@
 
   const firebaseConfig = {
     apiKey: "AIzaSyBIaUMURs-honTuc2Y5hPLGoqOruDKxtV8",
-  authDomain: "store-f9d8a.firebaseapp.com",
-  projectId: "store-f9d8a",
-  storageBucket: "store-f9d8a.firebasestorage.app",
-  messagingSenderId: "913417248934",
-  appId: "1:913417248934:web:2345ee2dc0177bf3ae1467",
-  measurementId: "G-Q2TT0WX1PE"
+    authDomain: "store-f9d8a.firebaseapp.com",
+    projectId: "store-f9d8a",
+    storageBucket: "store-f9d8a.appspot.com",
+    messagingSenderId: "913417248934",
+    appId: "1:913417248934:web:2345ee2dc0177bf3ae1467",
+    measurementId: "G-Q2TT0WX1PE"
   };
 
   // Initialize Firebase
   try {
     firebase.initializeApp(firebaseConfig);
+    console.log('Firebase initialized');
   } catch (e) {
     console.warn('Firebase init warning (might be already initialized):', e && e.message);
   }
@@ -152,20 +153,22 @@
 
   // Click handlers
   btnGoogle.addEventListener('click', () => {
+    console.log('Google button clicked — opening popup');
     auth.signInWithPopup(googleProvider)
-      .then(res => { console.log('Google sign-in success', res.user); })
+      .then(res => { console.log('Google sign-in success', res.user); alert('Signed in: ' + (res.user.displayName || res.user.email)); })
       .catch(err => {
         console.error('Google sign-in error', err);
-        alert('Google sign-in error: ' + err.message);
+        alert('Google sign-in error: ' + err.message + '\\n(See console for details)');
       });
   });
 
   btnFacebook.addEventListener('click', () => {
+    console.log('Facebook button clicked — opening popup');
     auth.signInWithPopup(facebookProvider)
-      .then(res => { console.log('Facebook sign-in success', res.user); })
+      .then(res => { console.log('Facebook sign-in success', res.user); alert('Signed in: ' + (res.user.displayName || res.user.email)); })
       .catch(err => {
         console.error('Facebook sign-in error', err);
-        alert('Facebook sign-in error: ' + err.message);
+        alert('Facebook sign-in error: ' + err.message + '\\n(See console for details)');
       });
   });
 
@@ -189,13 +192,21 @@
       // Show user details
       loginText.textContent = user.displayName || user.email || 'Account';
       accountIcon.src = user.photoURL || 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
-      // Optional: you can save user info to your DB via fetch POST here
-      // fetch('/api/save-user', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({uid:user.uid, email:user.email, name:user.displayName})})
+      console.log('User signed in:', user);
     } else {
       // Reset to default
       loginText.textContent = 'Login';
       accountIcon.src = 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png';
+      console.log('No user signed in');
     }
+  });
+
+  // Better error logging for debugging
+  window.addEventListener('unhandledrejection', e => {
+    console.error('Unhandled promise rejection:', e.reason);
+  });
+  window.addEventListener('error', e => {
+    console.error('Window error:', e.message, e.error);
   });
 
   // Helpful dev note: If popups are blocked, tell user to allow popups or serve page via http server.
